@@ -1,12 +1,12 @@
-/* ============================================================
-   QuickDial – Main Stylesheet
-   File: css/style.css
-   ============================================================ */
+/* main styles */
 
-/* ── Google Font ── */
+
+/* Google Font  */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ── CSS Variables ── */
+/* variables */
+
 :root {
   --primary:      #e8322a;
   --primary-dark: #c0211a;
@@ -29,7 +29,8 @@
   --transition:   .25s ease;
 }
 
-/* ── Reset ── */
+/* reset */
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -44,7 +45,8 @@ img { max-width: 100%; display: block; }
 ul { list-style: none; }
 input, textarea, select, button { font-family: inherit; }
 
-/* ── Utility ── */
+/* utils */
+
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .text-center { text-align: center; }
 .mt-1 { margin-top: .5rem; }
@@ -59,7 +61,8 @@ input, textarea, select, button { font-family: inherit; }
 .w-100 { width: 100%; }
 .hidden { display: none; }
 
-/* ── Buttons ── */
+/* buttons */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -83,28 +86,30 @@ input, textarea, select, button { font-family: inherit; }
 .btn-sm { padding: .35rem .9rem; font-size: .82rem; }
 .btn-lg { padding: .75rem 2rem; font-size: 1rem; }
 
-/* ── Alerts ── */
+/* alerts */
+
 .alert { padding: .9rem 1.2rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: .9rem; font-weight: 500; display: flex; align-items: center; gap: .6rem; }
 .alert-success { background: #d1fae5; color: #065f46; border-left: 4px solid var(--success); }
 .alert-danger  { background: #fee2e2; color: #991b1b; border-left: 4px solid var(--danger); }
 .alert-warning { background: #fef3c7; color: #92400e; border-left: 4px solid var(--warning); }
 .alert-info    { background: #dbeafe; color: #1e40af; border-left: 4px solid #3b82f6; }
 
-/* ── Badges ── */
+/* badges */
+
 .badge { display: inline-block; padding: .2rem .65rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
 .badge-primary { background: var(--primary-light); color: var(--primary); }
 .badge-success { background: #d1fae5; color: #065f46; }
 .badge-warning { background: #fef3c7; color: #92400e; }
 .badge-danger  { background: #fee2e2; color: #991b1b; }
 
-/* ── Stars ── */
+/* stars */
+
 .stars { color: var(--warning); font-size: .9rem; letter-spacing: 1px; }
 .star-empty { color: #d1d5db; }
 
-/* ============================================================
-   NAVBAR
-   ============================================================ */
-.navbar {
+/* navbar */
+
+   .navbar {
   background: var(--dark);
   position: sticky;
   top: 0;
@@ -142,9 +147,8 @@ input, textarea, select, button { font-family: inherit; }
 .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
 .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all var(--transition); }
 
-/* ============================================================
-   HERO / HOMEPAGE
-   ============================================================ */
+/* homepage / hero */
+
 .hero {
   background: linear-gradient(135deg, var(--dark) 0%, var(--dark-mid) 50%, #0f3460 100%);
   padding: 80px 0 90px;
@@ -202,7 +206,8 @@ input, textarea, select, button { font-family: inherit; }
 .search-box button:hover { background: var(--primary-dark); transform: scale(1.03); }
 .search-divider { width: 1px; background: var(--border); height: 28px; flex-shrink: 0; }
 
-/* ── Category pills ── */
+/* categories */
+
 .popular-cats { margin-top: 2.5rem; position: relative; z-index: 1; }
 .popular-cats p { color: rgba(255,255,255,.5); font-size: .85rem; margin-bottom: .8rem; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; }
 .cat-pills { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
@@ -219,14 +224,16 @@ input, textarea, select, button { font-family: inherit; }
 }
 .cat-pill:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
 
-/* ── Stats bar ── */
+/* stats */
+
 .stats-bar { background: var(--primary); padding: 1rem 0; }
 .stats-bar .container { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
 .stat-item { text-align: center; color: #fff; }
 .stat-item .num { font-size: 1.6rem; font-weight: 800; }
 .stat-item .lbl { font-size: .78rem; opacity: .85; font-weight: 500; }
 
-/* ── Section headers ── */
+/* section headers */
+
 .section-header { text-align: center; margin-bottom: 2.5rem; }
 .section-header h2 { font-size: 1.9rem; font-weight: 800; color: var(--dark); }
 .section-header p { color: var(--text-muted); margin-top: .4rem; }
@@ -234,7 +241,8 @@ input, textarea, select, button { font-family: inherit; }
   width: 52px; height: 4px; background: var(--primary); border-radius: 2px; margin: .7rem auto 0;
 }
 
-/* ── Category cards ── */
+/* categories card */
+
 .categories-section { padding: 5rem 0; }
 .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1.2rem; }
 .cat-card {
@@ -251,7 +259,8 @@ input, textarea, select, button { font-family: inherit; }
 .cat-card i { font-size: 2rem; color: var(--primary); margin-bottom: .8rem; }
 .cat-card p { font-size: .85rem; font-weight: 600; color: var(--dark); }
 
-/* ── Business cards ── */
+/* business cards */
+
 .featured-section { padding: 0 0 5rem; }
 .business-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
 .business-card {
@@ -282,7 +291,8 @@ input, textarea, select, button { font-family: inherit; }
 .rating-num { font-weight: 700; color: var(--dark); }
 .featured-badge { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; font-size: .7rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; }
 
-/* ── How it works ── */
+/* how it works */
+
 .how-section { background: var(--dark); padding: 5rem 0; }
 .how-section .section-header h2 { color: #fff; }
 .how-section .section-header p { color: rgba(255,255,255,.6); }
@@ -299,9 +309,8 @@ input, textarea, select, button { font-family: inherit; }
 .step-card h3 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
 .step-card p { color: rgba(255,255,255,.55); font-size: .85rem; }
 
-/* ============================================================
-   FORMS (Register / Login / Add Business / Contact)
-   ============================================================ */
+/* forms */
+
 .form-page { min-height: calc(100vh - 130px); display: flex; align-items: center; justify-content: center; padding: 3rem 1rem; }
 .form-card {
   background: #fff;
@@ -347,9 +356,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .form-control.is-invalid { border-color: var(--danger); }
 .form-control.is-valid  { border-color: var(--success); }
 
-/* ============================================================
-   SEARCH RESULTS
-   ============================================================ */
+/* search results */
+
 .search-results-page { padding: 2.5rem 0 4rem; }
 .search-bar-inline {
   background: var(--dark);
@@ -366,7 +374,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .no-results i { font-size: 4rem; color: var(--border); margin-bottom: 1rem; }
 .no-results h3 { color: var(--text-muted); font-size: 1.2rem; }
 
-/* ── List-style card ── */
+/* list cards */
+
 .business-list { display: flex; flex-direction: column; gap: 1.2rem; }
 .biz-list-card {
   background: #fff;
@@ -395,9 +404,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .biz-meta i { color: var(--primary); }
 .biz-actions { display: flex; flex-direction: column; gap: .5rem; align-items: flex-end; flex-shrink: 0; }
 
-/* ============================================================
-   BUSINESS DETAIL PAGE
-   ============================================================ */
+/* business detail */
+
 .detail-hero {
   background: linear-gradient(135deg, var(--dark), var(--dark-mid));
   padding: 3rem 0;
@@ -420,7 +428,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .sidebar-phone { font-size: 1.4rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: .5rem; }
 .map-placeholder { background: #f0f2f5; border-radius: var(--radius-sm); height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-muted); font-size: .88rem; margin-top: 1rem; border: 2px dashed var(--border); }
 
-/* ── Reviews ── */
+/* reviews */
+
 .review-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1rem; transition: box-shadow var(--transition); }
 .review-card:hover { box-shadow: var(--shadow); }
 .reviewer-name { font-weight: 700; font-size: .95rem; }
@@ -428,7 +437,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .review-comment { margin-top: .5rem; font-size: .9rem; color: var(--text-muted); }
 .review-form-section { background: var(--primary-light); border-radius: var(--radius-sm); padding: 1.5rem; margin-top: 1rem; }
 
-/* ── Star rating input ── */
+/* star input */
+
 .star-rating { display: flex; flex-direction: row-reverse; gap: .25rem; }
 .star-rating input { display: none; }
 .star-rating label { font-size: 1.6rem; color: #d1d5db; cursor: pointer; transition: color var(--transition); }
@@ -436,9 +446,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .star-rating label:hover,
 .star-rating label:hover ~ label { color: var(--warning); }
 
-/* ============================================================
-   ADMIN PANEL
-   ============================================================ */
+/* admin panel */
+
 .admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 64px); }
 .admin-sidebar { background: var(--dark); padding: 2rem 0; }
 .admin-sidebar .admin-brand { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
@@ -483,9 +492,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .data-table-head h3 { font-size: 1rem; font-weight: 700; color: var(--dark); }
 .action-buttons { display: flex; gap: .4rem; }
 
-/* ============================================================
-   CONTACT PAGE
-   ============================================================ */
+/* contact page */
+
 .contact-hero { background: linear-gradient(135deg, var(--dark), var(--dark-mid)); padding: 4rem 0; text-align: center; }
 .contact-hero h1 { color: #fff; font-size: 2.2rem; font-weight: 800; }
 .contact-hero p { color: rgba(255,255,255,.65); margin-top: .5rem; }
@@ -501,9 +509,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .contact-form-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 2rem; }
 .contact-form-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--dark); }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* footer */
+
 .footer { background: var(--dark); color: rgba(255,255,255,.7); padding: 4rem 0 0; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
 .footer-brand .brand-logo { display: flex; align-items: center; gap: .5rem; font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 1rem; }
@@ -525,9 +532,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .social-links a:hover { background: var(--primary); color: #fff; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding: 1.2rem 0; text-align: center; font-size: .82rem; margin-top: 3rem; }
 
-/* ============================================================
-   PAGINATION
-   ============================================================ */
+/* pagination */
+
 .pagination { display: flex; gap: .4rem; justify-content: center; margin-top: 2rem; }
 .page-btn {
   width: 38px; height: 38px; border-radius: var(--radius-sm);
@@ -538,9 +544,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 }
 .page-btn:hover, .page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* responsive */
+
 @media (max-width: 1024px) {
   .detail-grid { grid-template-columns: 1fr; }
   .contact-sidebar { position: static; }
