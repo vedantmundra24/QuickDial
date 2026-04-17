@@ -1,8 +1,7 @@
 <?php
-/**
- * QuickDial – Add / List a Business
- * File: add_business.php
- */
+
+// business page 
+
 $pageTitle = 'List Your Business';
 $pageDesc  = 'Submit your business to QuickDial and get discovered by thousands.';
 require_once 'config/db_connect.php';
@@ -11,11 +10,13 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 $error   = '';
 $success = '';
 
-/* ── Fetch categories for the dropdown ── */
+// categories
+
 $cats = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitise
+    
+
     $userId      = $_SESSION['user_id'] ?? null;
     $catId       = (int)($_POST['category_id'] ?? 0);
     $name        = trim($_POST['name']        ?? '');
@@ -30,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $openTime    = $_POST['opening_time']    ?? null;
     $closeTime   = $_POST['closing_time']    ?? null;
 
-    // Validation
+    
+    // validation
+
     if (empty($name) || empty($phone) || empty($address) || empty($city) || !$catId) {
         $error = 'Name, category, phone, address and city are required fields.';
     } elseif (!preg_match('/^[0-9]{10}$/', $phone)) {
