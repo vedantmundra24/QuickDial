@@ -1,17 +1,18 @@
 <?php
-/**
- * QuickDial – Homepage
- * File: index.php
- */
+
+// home page 
+
 $pageTitle = 'Find Local Businesses Near You';
 $pageDesc  = 'QuickDial – Discover restaurants, hospitals, hotels, salons and more in your city.';
 require_once 'config/db_connect.php';
 require_once 'includes/header.php';
 
-// Fetch all categories
+// categories
+
 $cats = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
 
-// Fetch featured businesses with avg rating
+// featured
+
 $featuredStmt = $pdo->query("
     SELECT b.id, b.name, b.phone, b.address, b.city, b.featured,
            c.name AS category_name, c.icon AS category_icon,
@@ -26,13 +27,15 @@ $featuredStmt = $pdo->query("
 ");
 $featured = $featuredStmt->fetchAll();
 
-// Stats
+// stats
+
 $totalBiz   = $pdo->query("SELECT COUNT(*) FROM businesses WHERE status='approved'")->fetchColumn();
 $totalCats  = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn();
 $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalCities = $pdo->query("SELECT COUNT(DISTINCT city) FROM businesses WHERE status='approved'")->fetchColumn();
 
-// Helper: render stars
+// stars
+
 function starHtml(float $r): string {
     $html = '';
     for ($i = 1; $i <= 5; $i++) {
@@ -42,7 +45,8 @@ function starHtml(float $r): string {
 }
 ?>
 
-<!-- ── HERO ── -->
+<!-- hero -->
+
 <section class="hero">
   <div class="container hero-content">
     <h1>Find the Best <span>Local Businesses</span><br>Near You</h1>
@@ -79,7 +83,8 @@ function starHtml(float $r): string {
   </div>
 </section>
 
-<!-- ── STATS ── -->
+<!-- stats -->
+
 <div class="stats-bar">
   <div class="container">
     <div class="stat-item"><div class="num"><?= number_format($totalBiz) ?>+</div><div class="lbl">Businesses</div></div>
@@ -89,7 +94,8 @@ function starHtml(float $r): string {
   </div>
 </div>
 
-<!-- ── CATEGORIES ── -->
+<!-- categories -->
+
 <section class="categories-section">
   <div class="container">
     <div class="section-header">
@@ -108,7 +114,8 @@ function starHtml(float $r): string {
   </div>
 </section>
 
-<!-- ── FEATURED BUSINESSES ── -->
+<!-- featured businessess -->
+
 <?php if (!empty($featured)): ?>
 <section class="featured-section">
   <div class="container">
@@ -159,7 +166,8 @@ function starHtml(float $r): string {
 </section>
 <?php endif; ?>
 
-<!-- ── HOW IT WORKS ── -->
+<!-- how website works info -->
+
 <section class="how-section">
   <div class="container">
     <div class="section-header">
@@ -192,7 +200,8 @@ function starHtml(float $r): string {
   </div>
 </section>
 
-<!-- ── CTA ── -->
+<!-- cta -->
+
 <section style="background:var(--primary);padding:4rem 0;text-align:center">
   <div class="container">
     <h2 style="color:#fff;font-size:2rem;font-weight:800;margin-bottom:.5rem">Own a Business?</h2>
