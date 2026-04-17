@@ -1,16 +1,11 @@
--- ============================================================
--- QuickDial - Local Business Directory Database
--- File: database/quickdial.sql
--- Description: Complete database schema with sample data
--- ============================================================
+
+-- quickdial db
 
 CREATE DATABASE IF NOT EXISTS quickdial_db;
 USE quickdial_db;
 
--- ============================================================
--- Table: categories
--- Stores business categories
--- ============================================================
+-- business categories
+
 CREATE TABLE IF NOT EXISTS categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -18,7 +13,8 @@ CREATE TABLE IF NOT EXISTS categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample categories
+-- sample categories
+
 INSERT INTO categories (name, icon) VALUES
 ('Restaurants',      'fa-utensils'),
 ('Hospitals',        'fa-hospital'),
@@ -36,10 +32,8 @@ INSERT INTO categories (name, icon) VALUES
 ('Banks',            'fa-university'),
 ('Pharmacies',       'fa-pills');
 
--- ============================================================
--- Table: users
--- Stores registered users
--- ============================================================
+-- users
+
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -50,16 +44,15 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample user (password: user123)
+-- sample user (password: user123)
+
 INSERT INTO users (name, email, password, phone, city) VALUES
 ('Rahul Sharma',  'rahul@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9876543210', 'Mumbai'),
 ('Priya Mehta',   'priya@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9123456780', 'Delhi'),
 ('Amit Kumar',    'amit@example.com',   '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9988776655', 'Bangalore');
 
--- ============================================================
--- Table: admin
--- Stores admin credentials
--- ============================================================
+-- admin
+
 CREATE TABLE IF NOT EXISTS admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
@@ -68,14 +61,13 @@ CREATE TABLE IF NOT EXISTS admin (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Default admin (password: admin123)
+-- default admin (password: admin123)
+
 INSERT INTO admin (username, password, email) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@quickdial.com');
 
--- ============================================================
--- Table: businesses
--- Stores business listings
--- ============================================================
+-- businesses
+
 CREATE TABLE IF NOT EXISTS businesses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT DEFAULT NULL,
@@ -98,7 +90,8 @@ CREATE TABLE IF NOT EXISTS businesses (
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample businesses (status = approved)
+-- sample businesses approved one 
+
 INSERT INTO businesses (user_id, category_id, name, description, address, city, state, pincode, phone, email, website, opening_time, closing_time, status, featured) VALUES
 (1, 1,  'Spice Garden Restaurant',    'Authentic Indian cuisine with a modern twist. Best biryani in town.',         '45 Marine Drive, Colaba',         'Mumbai',    'Maharashtra', '400001', '9812345670', 'spicegarden@email.com',    'www.spicegarden.com',    '08:00:00', '23:00:00', 'approved', 1),
 (1, 2,  'City Care Hospital',         'Multi-specialty hospital with 24/7 emergency services.',                     '12 Link Road, Andheri West',      'Mumbai',    'Maharashtra', '400058', '9823456781', 'citycare@email.com',       'www.citycarehospital.com','00:00:00', '23:59:00', 'approved', 1),
@@ -113,10 +106,8 @@ INSERT INTO businesses (user_id, category_id, name, description, address, city, 
 (2, 2,  'Apollo Life Clinic',         'Specialized clinic for cardiology, orthopedics, and general medicine.',      '45 Vasant Vihar',                 'Delhi',     'Delhi',       '110057', '9812340001', 'apollolife@email.com',     'www.apollolife.com',      '09:00:00', '21:00:00', 'approved', 1),
 (3, 13, 'Horizon Travels & Tours',    'Affordable holiday packages, visa assistance, and flight bookings.',         '9 MG Road, Brigade Road',         'Bangalore', 'Karnataka',   '560001', '9823451002', 'horizon@email.com',        'www.horizontravels.com',  '09:00:00', '18:00:00', 'approved', 0);
 
--- ============================================================
--- Table: reviews
--- Stores user reviews for businesses
--- ============================================================
+-- reviews
+
 CREATE TABLE IF NOT EXISTS reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
     business_id INT NOT NULL,
@@ -130,7 +121,8 @@ CREATE TABLE IF NOT EXISTS reviews (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample reviews
+-- sample reviews
+
 INSERT INTO reviews (business_id, user_id, reviewer_name, reviewer_email, rating, comment) VALUES
 (1, 2, 'Priya Mehta',   'priya@example.com',  5, 'Absolutely loved the biryani! Ambiance is great and staff is very friendly.'),
 (1, 3, 'Amit Kumar',    'amit@example.com',   4, 'Good food with reasonable prices. Will definitely visit again.'),
@@ -144,10 +136,8 @@ INSERT INTO reviews (business_id, user_id, reviewer_name, reviewer_email, rating
 (11, 3, 'Amit Kumar',   'amit@example.com',   5, 'Very professional doctors. Got my heart check done without any wait.'),
 (12, 2, 'Priya Mehta',  'priya@example.com',  4, 'Booked a Goa trip through them. Everything was perfectly arranged.');
 
--- ============================================================
--- Table: contact_messages
--- Stores contact form submissions
--- ============================================================
+-- contact messages
+
 CREATE TABLE IF NOT EXISTS contact_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -159,10 +149,8 @@ CREATE TABLE IF NOT EXISTS contact_messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ============================================================
--- View: business_ratings
--- Pre-calculates average rating per business
--- ============================================================
+-- business ratings
+
 CREATE OR REPLACE VIEW business_ratings AS
 SELECT
     b.id,
