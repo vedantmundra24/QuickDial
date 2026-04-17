@@ -1,22 +1,23 @@
 <?php
-/**
- * QuickDial – Admin Panel
- * File: admin/admin_panel.php
- * Handles: login, dashboard, businesses, messages
- */
+
+// admin panel (login, dashboard, businesses, messages)
+
 session_start();
 require_once '../config/db_connect.php';
 
-/* ── Auth check ── */
+// auth check
+
 $isLoggedIn = isset($_SESSION['admin_id']);
 
-/* ── Logout ── */
+// logout
+
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     $_SESSION = []; session_destroy();
     header('Location: admin_panel.php'); exit;
 }
 
-/* ── Handle POST actions ── */
+// handle post
+
 $msg = '';
 if ($isLoggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
@@ -48,8 +49,8 @@ if ($isLoggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     header('Location: admin_panel.php?tab=' . ($_GET['tab'] ?? 'dashboard') . '&msg=' . urlencode($msg)); exit;
 }
+// admin login
 
-/* ── Admin Login ── */
 $loginError = '';
 if (!$isLoggedIn) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
@@ -66,7 +67,9 @@ if (!$isLoggedIn) {
             $loginError = 'Invalid username or password.';
         }
     }
-    // Show login form
+    
+    // show login form
+    
     ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,7 +119,8 @@ if (!$isLoggedIn) {
     exit;
 }
 
-/* ── Stats ── */
+// stats
+
 $tab         = $_GET['tab'] ?? 'dashboard';
 $flashMsg    = $_GET['msg'] ?? $msg;
 $totalBiz    = $pdo->query("SELECT COUNT(*) FROM businesses")->fetchColumn();
@@ -126,7 +130,8 @@ $totalUsers  = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalRevs   = $pdo->query("SELECT COUNT(*) FROM reviews")->fetchColumn();
 $unreadMsgs  = $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE status='unread'")->fetchColumn();
 
-/* ── Tab data ── */
+// tab data
+
 $businesses = $users = $revList = $messages = [];
 if ($tab === 'pending') {
     $businesses = $pdo->query("
@@ -162,7 +167,8 @@ if ($tab === 'pending') {
 </head>
 <body>
 
-<!-- ── Topbar ── -->
+<!-- header -->
+
 <nav class="navbar">
   <div class="container">
     <a href="../index.php" class="navbar-brand"><i class="fa-solid fa-bolt"></i> Quick<span>Dial</span></a>
@@ -177,7 +183,9 @@ if ($tab === 'pending') {
 </nav>
 
 <div class="admin-layout">
-  <!-- ── Sidebar ── -->
+
+<!-- sidebar -->
+
   <aside class="admin-sidebar">
     <div class="admin-brand">
       <h3>Control Panel</h3>
@@ -203,14 +211,17 @@ if ($tab === 'pending') {
     </nav>
   </aside>
 
-  <!-- ── Main content ── -->
+ <!-- main -->
+
   <main class="admin-content">
     <?php if ($flashMsg): ?>
       <div class="alert alert-success" data-dismiss="4000"><i class="fa-solid fa-circle-check"></i> <?= htmlspecialchars($flashMsg) ?></div>
     <?php endif; ?>
 
     <?php if ($tab === 'dashboard'): ?>
-      <!-- DASHBOARD -->
+  
+      <!-- dashboard -->
+
       <div class="admin-header">
         <h1>Dashboard</h1>
         <p>Welcome back, <?= htmlspecialchars($_SESSION['admin_name']) ?>! Here's your overview.</p>
@@ -250,7 +261,8 @@ if ($tab === 'pending') {
       <?php endif; ?>
 
     <?php elseif ($tab === 'pending' || $tab === 'all_biz'): ?>
-      <!-- BUSINESSES TABLE -->
+      
+
       <div class="admin-header">
         <h1><?= $tab === 'pending' ? 'Pending Listings' : 'All Businesses' ?></h1>
         <p><?= $tab === 'pending' ? 'Review and approve or reject submitted listings.' : 'Manage all business listings.' ?></p>
@@ -333,7 +345,9 @@ if ($tab === 'pending') {
       </div>
 
     <?php elseif ($tab === 'users'): ?>
-      <!-- USERS -->
+   
+      <!-- users -->
+
       <div class="admin-header"><h1>Registered Users</h1><p>All user accounts on QuickDial.</p></div>
       <div class="data-table">
         <table>
@@ -357,7 +371,9 @@ if ($tab === 'pending') {
       </div>
 
     <?php elseif ($tab === 'reviews'): ?>
-      <!-- REVIEWS -->
+   
+      <!-- reviews -->
+
       <div class="admin-header"><h1>All Reviews</h1><p>Moderate user reviews.</p></div>
       <div class="data-table">
         <table>
@@ -390,7 +406,9 @@ if ($tab === 'pending') {
       </div>
 
     <?php elseif ($tab === 'messages'): ?>
-      <!-- MESSAGES -->
+     
+      <!-- messages -->
+
       <div class="admin-header"><h1>Contact Messages</h1><p>Enquiries submitted through the contact form.</p></div>
       <div class="data-table">
         <table>
