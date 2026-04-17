@@ -1,13 +1,14 @@
 <?php
-/**
- * QuickDial – Shared Header Partial
- * File: includes/header.php
- */
+
+// header
+
 if (session_status() === PHP_SESSION_NONE) session_start();
 $currentPage = basename($_SERVER['PHP_SELF']);
 $isAdmin = isset($_SESSION['admin_id']);
 $isUser  = isset($_SESSION['user_id']);
-// Detect if we're inside admin/ subfolder
+
+// check admin folder
+
 $prefix = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../' : '';
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,8 @@ $prefix = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../' : '';
 </head>
 <body>
 
-<!-- ── Navbar ── -->
+<!-- navbar -->
+
 <nav class="navbar">
   <div class="container">
     <a href="<?= $prefix ?>index.php" class="navbar-brand">
