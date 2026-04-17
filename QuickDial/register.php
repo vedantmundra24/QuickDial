@@ -1,14 +1,14 @@
 <?php
-/**
- * QuickDial – Register Page
- * File: register.php
- */
+
+// register page 
+
 $pageTitle = 'Create Account';
 $pageDesc  = 'Register on QuickDial to list your business or leave reviews.';
 require_once 'config/db_connect.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Redirect if already logged in
+// redirecting if already logged
+
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php'); exit;
 }
@@ -17,7 +17,7 @@ $error   = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitise inputs
+   
     $name     = trim($_POST['name']     ?? '');
     $email    = trim($_POST['email']    ?? '');
     $phone    = trim($_POST['phone']    ?? '');
@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password']      ?? '';
     $confirm  = $_POST['confirm_password'] ?? '';
 
-    // Server-side validation
+    // validation
+
     if (empty($name) || empty($email) || empty($password)) {
         $error = 'Name, email, and password are required.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -35,17 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirm) {
         $error = 'Passwords do not match.';
     } else {
-        // Check duplicate email
+        
+        // duplicate email
+
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if ($stmt->fetch()) {
             $error = 'An account with this email already exists. <a href="login.php">Login instead?</a>';
         } else {
-            // Hash & insert
+            
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $ins  = $pdo->prepare("INSERT INTO users (name, email, password, phone, city) VALUES (?, ?, ?, ?, ?)");
             $ins->execute([$name, $email, $hash, $phone, $city]);
+            
             // Auto-login
+
             $_SESSION['user_id']   = $pdo->lastInsertId();
             $_SESSION['user_name'] = $name;
             $_SESSION['user_email']= $email;
