@@ -1,15 +1,15 @@
 <?php
-/**
- * QuickDial – Business Detail Page
- * File: business_details.php
- */
+
+// business details
+
 require_once 'config/db_connect.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: search.php'); exit; }
 
-// Fetch business
+// business
+
 $stmt = $pdo->prepare("
     SELECT b.*, c.name AS category_name, c.icon AS category_icon
     FROM businesses b
@@ -20,13 +20,15 @@ $stmt->execute([$id]);
 $biz = $stmt->fetch();
 if (!$biz) { header('Location: search.php'); exit; }
 
-// Fetch reviews
+// reviews
+
 $revStmt = $pdo->prepare("SELECT * FROM reviews WHERE business_id = ? ORDER BY created_at DESC");
 $revStmt->execute([$id]);
 $reviews = $revStmt->fetchAll();
 $avgRating = count($reviews) ? round(array_sum(array_column($reviews,'rating')) / count($reviews), 1) : 0;
 
-// Handle review submission
+// review submit
+
 $reviewError = ''; $reviewSuccess = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     $rName    = trim($_POST['reviewer_name']  ?? '');
@@ -46,7 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
         ");
         $ins->execute([$id, $userId, $rName, $rEmail, $rating, $comment]);
         $reviewSuccess = 'Your review has been posted!';
-        // Refresh
+        
+        // reloading
+
         header("Location: business_details.php?id=$id#reviews"); exit;
     }
 }
@@ -62,8 +66,8 @@ function starHtml(float $r, $size='1rem'): string {
 
 require_once 'includes/header.php';
 ?>
+<!-- hero -->
 
-<!-- ── Detail Hero ── -->
 <div class="detail-hero">
   <div class="container">
     <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem">
@@ -89,11 +93,14 @@ require_once 'includes/header.php';
   </div>
 </div>
 
-<!-- ── Body ── -->
+<!-- body -->
+
 <section class="detail-body">
   <div class="container">
     <div class="detail-grid">
-      <!-- Left column -->
+   
+    <!-- left -->
+
       <div>
         <?php if ($biz['description']): ?>
         <div class="detail-section">
@@ -102,7 +109,8 @@ require_once 'includes/header.php';
         </div>
         <?php endif; ?>
 
-        <!-- Reviews -->
+        <!-- reviews -->
+
         <div class="detail-section" id="reviews">
           <h3><i class="fa-solid fa-star"></i> Reviews
             <span style="font-size:.85rem;font-weight:400;color:var(--text-muted);margin-left:.5rem">(<?= count($reviews) ?>)</span>
@@ -131,7 +139,8 @@ require_once 'includes/header.php';
             <?php endforeach; ?>
           <?php endif; ?>
 
-          <!-- Write a review -->
+          <!-- review form -->
+
           <div class="review-form-section" style="margin-top:1.5rem">
             <h4 style="font-size:.95rem;font-weight:700;margin-bottom:1rem;color:var(--dark)">Write a Review</h4>
             <?php if ($reviewError): ?>
@@ -171,7 +180,8 @@ require_once 'includes/header.php';
         </div>
       </div>
 
-      <!-- Right sidebar -->
+      <!-- sidebar -->
+
       <div>
         <div class="contact-sidebar">
           <h3><i class="fa-solid fa-address-book" style="color:var(--primary)"></i> Contact Info</h3>
@@ -203,8 +213,7 @@ require_once 'includes/header.php';
             <i class="fa-solid fa-phone"></i> Call Now
           </a>
           <div class="map-placeholder">
-            <div><i class="fa-solid fa-map-location-dot" style="font-size:2rem;margin-bottom:.5rem;display:block"></i>
-            Map integration requires Google Maps API key.</div>
+            <div><i class="fa-solid fa-map-location-dot" style="font-size:2rem;margin-bottom:.5rem;display:block"></i></div>
           </div>
         </div>
       </div>
