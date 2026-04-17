@@ -1,14 +1,14 @@
 <?php
-/**
- * QuickDial – Search Results
- * File: search.php
- */
+
+// search bar
+
 $pageTitle = 'Search Businesses';
 $pageDesc  = 'Search and find verified local businesses on QuickDial.';
 require_once 'config/db_connect.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// ── Inputs ──
+// inputs 
+
 $q        = trim($_GET['q']        ?? '');
 $category = trim($_GET['category'] ?? '');
 $city     = trim($_GET['city']     ?? '');
@@ -17,7 +17,8 @@ $page     = max(1, (int)($_GET['page'] ?? 1));
 $perPage  = 8;
 $offset   = ($page - 1) * $perPage;
 
-// ── Build query ──
+// query
+
 $where  = ["b.status = 'approved'"];
 $params = [];
 
@@ -37,7 +38,8 @@ if ($city !== '') {
 
 $whereSQL = 'WHERE ' . implode(' AND ', $where);
 
-// Count total
+// total business and other stuffs counting 
+
 $countStmt = $pdo->prepare("
     SELECT COUNT(*) FROM businesses b
     LEFT JOIN categories c ON b.category_id = c.id
@@ -47,14 +49,16 @@ $countStmt->execute($params);
 $total = (int)$countStmt->fetchColumn();
 $totalPages = max(1, ceil($total / $perPage));
 
-// Sort
+// sorting of business
+
 $orderSQL = match($sort) {
     'name'   => 'b.name ASC',
     'newest' => 'b.created_at DESC',
     default  => 'avg_rating DESC',
 };
 
-// Fetch results
+// results
+
 $sql = "
     SELECT b.id, b.name, b.phone, b.address, b.city, b.featured,
            c.name AS category_name, c.icon AS category_icon,
@@ -72,10 +76,12 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $results = $stmt->fetchAll();
 
-// Categories for filter
+// categories filters
+
 $cats = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
 
-// Helper
+// helper
+
 function starHtml(float $r): string {
     $h = '';
     for ($i=1;$i<=5;$i++) $h .= $i<=$r ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star star-empty"></i>';
@@ -85,7 +91,8 @@ function starHtml(float $r): string {
 require_once 'includes/header.php';
 ?>
 
-<!-- ── Inline search bar ── -->
+<!-- search bar -->
+
 <div class="search-bar-inline">
   <div class="container">
     <form method="GET" action="search.php" style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
@@ -166,7 +173,8 @@ require_once 'includes/header.php';
         <?php endforeach; ?>
       </div>
 
-      <!-- Pagination -->
+  <!-- pagination -->
+
       <?php if ($totalPages > 1): ?>
         <?php
         $baseUrl = 'search.php?' . http_build_query(['q'=>$q,'category'=>$category,'city'=>$city,'sort'=>$sort]);
