@@ -1,8 +1,7 @@
 <?php
-/**
- * QuickDial – Contact Page
- * File: contact.php
- */
+
+// contact page
+
 $pageTitle = 'Contact Us';
 $pageDesc  = 'Get in touch with the QuickDial team for support, feedback or partnership enquiries.';
 require_once 'config/db_connect.php';
@@ -43,7 +42,9 @@ require_once 'includes/header.php';
 <section class="contact-body">
   <div class="container">
     <div class="contact-grid">
-      <!-- Info -->
+      
+    <!-- info -->
+
       <div>
         <div class="contact-info-card">
           <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:1.5rem;color:var(--dark)">Contact Information</h3>
@@ -51,7 +52,7 @@ require_once 'includes/header.php';
             <div class="c-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div class="c-text">
               <h4>Office Address</h4>
-              <p>42, Business Park, Andheri East, Mumbai – 400069, Maharashtra, India</p>
+              <p>Indian Institute of Information and technology Nagpur – 441108, Maharashtra, India</p>
             </div>
           </div>
           <div class="contact-info-item">
@@ -78,7 +79,8 @@ require_once 'includes/header.php';
         </div>
       </div>
 
-      <!-- Form -->
+      <!-- form -->
+
       <div class="contact-form-card">
         <h3>Send Us a Message</h3>
         <?php if ($success): ?>
