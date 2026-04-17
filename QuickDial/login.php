@@ -1,8 +1,7 @@
 <?php
-/**
- * QuickDial – Login Page
- * File: login.php
- */
+
+// login page 
+
 $pageTitle = 'Login';
 $pageDesc  = 'Login to your QuickDial account.';
 require_once 'config/db_connect.php';
