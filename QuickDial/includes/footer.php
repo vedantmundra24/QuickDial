@@ -1,12 +1,12 @@
 <?php
-/**
- * QuickDial – Shared Footer Partial
- * File: includes/footer.php
- */
+
+// footer
+
 $prefix = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../' : '';
 ?>
 
-<!-- ── Footer ── -->
+<!-- footer  -->
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -45,7 +45,7 @@ $prefix = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../' : '';
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="#"><i class="fa-solid fa-location-dot fa-xs"></i> Mumbai, India</a></li>
+          <li><a href="#"><i class="fa-solid fa-location-dot fa-xs"></i> Nagpur, India</a></li>
           <li><a href="tel:+911234567890"><i class="fa-solid fa-phone fa-xs"></i> +91 12345 67890</a></li>
           <li><a href="mailto:support@quickdial.in"><i class="fa-solid fa-envelope fa-xs"></i> support@quickdial.in</a></li>
         </ul>
