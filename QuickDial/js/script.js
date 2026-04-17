@@ -1,9 +1,7 @@
-/**
- * QuickDial – Main JavaScript
- * File: js/script.js
- */
+// main js
 
-/* ── Mobile nav toggle ── */
+// mobile nav toggle
+
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('navLinks');
 if (hamburger && navLinks) {
@@ -14,13 +12,15 @@ if (hamburger && navLinks) {
   });
 }
 
-/* ── Auto-dismiss alerts ── */
+// dismiss alerts
+
 document.querySelectorAll('.alert[data-dismiss]').forEach(el => {
   setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); },
     parseInt(el.dataset.dismiss) || 4000);
 });
 
-/* ── Star-rating interactive ── */
+// star rating
+
 function initStarRating() {
   const container = document.querySelector('.star-rating');
   if (!container) return;
@@ -34,7 +34,8 @@ function initStarRating() {
 }
 initStarRating();
 
-/* ── Category pill click → search ── */
+// category search
+
 document.querySelectorAll('.cat-pill').forEach(pill => {
   pill.addEventListener('click', () => {
     const cat = pill.dataset.cat;
@@ -42,14 +43,16 @@ document.querySelectorAll('.cat-pill').forEach(pill => {
   });
 });
 
-/* ── Category card click → search ── */
+// category card search
+
 document.querySelectorAll('.cat-card[data-cat]').forEach(card => {
   card.addEventListener('click', () => {
     window.location.href = `search.php?category=${encodeURIComponent(card.dataset.cat)}`;
   });
 });
 
-/* ── Form validation helpers ── */
+// form validation
+
 function showError(inputId, msg) {
   const el = document.getElementById(inputId);
   if (!el) return;
@@ -74,7 +77,8 @@ function clearValidation(inputId) {
   el.classList.remove('is-invalid', 'is-valid');
 }
 
-/* ── Register form validation ── */
+// register validation
+
 const registerForm = document.getElementById('registerForm');
 if (registerForm) {
   registerForm.addEventListener('submit', function(e) {
@@ -109,7 +113,8 @@ if (registerForm) {
   });
 }
 
-/* ── Login form validation ── */
+// login validation
+
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
   loginForm.addEventListener('submit', function(e) {
@@ -126,8 +131,8 @@ if (loginForm) {
     if (!valid) e.preventDefault();
   });
 }
+// business validation
 
-/* ── Add business form validation ── */
 const bizForm = document.getElementById('bizForm');
 if (bizForm) {
   bizForm.addEventListener('submit', function(e) {
@@ -146,8 +151,8 @@ if (bizForm) {
     if (!valid) e.preventDefault();
   });
 }
+// contact validation
 
-/* ── Contact form validation ── */
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
@@ -162,8 +167,8 @@ if (contactForm) {
     if (!valid) e.preventDefault();
   });
 }
+// smooth scroll
 
-/* ── Smooth scroll for anchor links ── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -171,7 +176,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* ── Animate cards on scroll ── */
+// card animation on scroll
+
 if ('IntersectionObserver' in window) {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => {
@@ -191,7 +197,8 @@ if ('IntersectionObserver' in window) {
   });
 }
 
-/* ── Admin: confirm before delete ── */
+// confirm action for deleting
+
 document.querySelectorAll('.confirm-delete').forEach(btn => {
   btn.addEventListener('click', e => {
     if (!confirm('Are you sure you want to delete this item? This cannot be undone.')) {
@@ -200,7 +207,8 @@ document.querySelectorAll('.confirm-delete').forEach(btn => {
   });
 });
 
-/* ── Sort select on search page ── */
+// sort select
+
 const sortSelect = document.getElementById('sortSelect');
 if (sortSelect) {
   sortSelect.addEventListener('change', () => {
